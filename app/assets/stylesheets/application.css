@@ -20,6 +20,10 @@
   box-sizing: border-box;
 }
 
+#notice {
+  color: green;
+}
+
 body {
   background-color: #fff;
   color: #333;
