@@ -1,5 +1,9 @@
+ <html>
   <body>
+    <p id="notice">Book was successfully destroyed.</p>
+    <p id="notice">Book was successfully updated.</p>
     <h1>Books</h1>
+
     <table>
       <thead>
         <tr>
@@ -10,31 +14,37 @@
       </thead>
       <tbody>
         <tr>
-          <td>
-            <%= link_to "book.title", new_book_path %>
-          </td>
-          <td>
-            <%= link_to "book.body", new_book_path %>
-          </td>
-          <td>
-            <a class= "show_params[:id]" href="/books/params[:id]">Show</a>
-          </td>
-          <td>
-            <a class= "edit_params[:id]" href="/books/params[:id]/edit">Edit</a>
-          </td>
-          <td>
-            <a data-confirm= "Are you sure?" class="destroy_params[:id]" rel="nofollow" data-method="delete" href="/books/params[:id]">Destroy</a>
-          </td>
+          <% @books.each do |book| %>
+           <td><%= book.title %></td>
+           <td><%= book.body %></td>
+           <td>
+            <%= link_to "Show", "/books/:id" %>
+           </td>
+           <td>
+            <%= link_to "Edit", "/books/:id/edit" %>
+           </td>
+           <td>
+            <%= link_to "Destroy", books_path(@book) , method: :delete, data: {confirm: "Are you sure?"} %>
+           </td>
+          <% end %>
         </tr>
       </tbody>
     </table>
+
     <h2>New Book</h2>
-    <%= form_with model:@book, local:true do |f| %>
-     <h4>Title</h4>
-     <%= f.text_field :title %>
-     <h4>Body</h4>
-     <%= f.text_area :body %>
-     <%= f.submit 'Create Book' %>
+    <%= form_with model:@book,local:true do |f| %>
+     <div class="field">
+      <h4>Title</h4>
+      <%= f.text_field :title %>
+     </div>
+     <div class="field">
+      <h4>Body</h4>
+      <%= f.text_area :body %>
+     </div>
+     <div class="actions">
+      <%= f.submit 'Create Book' %>
+     </div>
     <% end %>
+
   </body>
-</html>
+ </html>
