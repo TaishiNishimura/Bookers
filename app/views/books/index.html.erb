@@ -1,9 +1,9 @@
  <html>
   <body>
-    <p id="notice">Book was successfully destroyed.</p>
-    <p id="notice">Book was successfully updated.</p>
+   <% if flash[:destroyed] %>
+   <p><%= flash[:destroyed] %></p>
+   <% end %>
     <h1>Books</h1>
-
     <table>
       <thead>
         <tr>
@@ -32,6 +32,16 @@
     </table>
 
     <h2>New Book</h2>
+    
+    <% if @book.errors.any? %>
+    <h3><%= @book.errors.count %> errors prohibited this book from being saved:</h3>
+    <ul>
+      <% @book.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+    <% end %>
+    
     <%= form_with model:@book, url:'/books', local:true do |f| %>
      <div class="field">
       <label for="book_title">Title</label>
@@ -45,6 +55,5 @@
       <%= f.submit 'Create Book' %>
      </div>
     <% end %>
-
   </body>
  </html>
