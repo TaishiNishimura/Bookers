@@ -1,12 +1,11 @@
 <body>
-  	<%= render 'layouts/flash_messages' %>
   <P>
     <strong>Title:<%= @book.title %></strong>
   </P>
   <p>
     <strong>Body:<%= @book.body %></strong>
   </p>
-  <%= link_to 'Edit', '/books/:id/edit' %>
+  <%= link_to 'Edit', edit_book_path(@book.id) %>
    |
-  <%= link_to 'Back', '/books' %>
+  <%= link_to 'Back', books_path %>
 </body>
